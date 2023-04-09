@@ -1,18 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-export function Filter({ onChange }) {
-  const trowValue = e => {
-    const value = e.currentTarget.value;
-    onChange(value);
-  };
+import { useDispatch } from 'react-redux';
+import { trowFilterValue, visibleContact } from 'redux/contactLogic';
+export function Filter() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <p>Find contacts by name</p>
-      <input type="text" onChange={trowValue} />
+      <input
+        type="text"
+        onChange={e => {
+          dispatch(trowFilterValue(e.currentTarget.value));
+          dispatch(visibleContact());
+        }}
+      />
     </>
   );
 }
 export default Filter;
-Filter.prorTypes = {
-  onChange: PropTypes.func.isRequired,
-};

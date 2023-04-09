@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-export default function ContactForm({ onSubmit }) {
+
+import { useDispatch } from 'react-redux';
+import { formSubmitHandler } from 'redux/contactLogic';
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
+  const dispatch = useDispatch();
   const handelChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
@@ -21,7 +23,7 @@ export default function ContactForm({ onSubmit }) {
 
   const formSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+    dispatch(formSubmitHandler({ name, number }));
     reset();
   };
   const reset = () => {
@@ -63,6 +65,3 @@ export default function ContactForm({ onSubmit }) {
     </form>
   );
 }
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
