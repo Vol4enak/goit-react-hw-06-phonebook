@@ -10,7 +10,7 @@ export const ContactSlice = createSlice({
   initialState,
   reducers: {
     deleteContact(state, actions) {
-      console.log(actions);
+    
       state.contacts = state.contacts.filter(
         contact => contact.id !== actions.payload
       );
@@ -39,7 +39,6 @@ export const ContactSlice = createSlice({
     },
     trowFilterValue(state, actions) {
       state.filter = actions.payload;
-      console.log(state.filter);
     },
   },
 });
