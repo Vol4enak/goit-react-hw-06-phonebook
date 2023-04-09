@@ -4,13 +4,12 @@ const initialState = {
   contacts: [],
   filter: '',
 };
-
+  
 export const ContactSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
     deleteContact(state, actions) {
-    
       state.contacts = state.contacts.filter(
         contact => contact.id !== actions.payload
       );
@@ -31,12 +30,7 @@ export const ContactSlice = createSlice({
         number: actions.payload.number,
       });
     },
-    visibleContact(state) {
-      const normalaizedfilter = state.filter.toLocaleLowerCase();
-      state.contacts = state.contacts.filter(contact =>
-        contact.name.toLocaleLowerCase().includes(normalaizedfilter)
-      );
-    },
+   
     trowFilterValue(state, actions) {
       state.filter = actions.payload;
     },
@@ -47,5 +41,4 @@ export const {
   deleteContact,
   trowFilterValue,
   formSubmitHandler,
-  visibleContact,
 } = ContactSlice.actions;

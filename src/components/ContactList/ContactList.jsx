@@ -2,15 +2,17 @@ import React from 'react';
 import { deleteContact} from 'redux/contactLogic';
 import { useSelector, useDispatch } from 'react-redux';
 import { ContactInfo, ContactButtom } from './ContactList.styled';
-
+import contactsFiltration from 'components/services/contactsFiltration';
 export const ContactList = () => {
-  const stateContacts = useSelector(state => state.phoneBook.contacts);
   const dispatch = useDispatch();
-  
+  const contacts = useSelector(state => state.phoneBook.contacts);
+  const toFilter = useSelector(state => state.phoneBook.filter);
+  const filteredContacts = contactsFiltration(contacts, toFilter);
+  console.log(filteredContacts);
   return (
     <>
       <ul>
-        {stateContacts.map(({ id, name, number }) => (
+        {filteredContacts.map(({ id, name, number }) => (
           <ContactInfo key={id}>
             <p>{name}</p>
             <p>{number}</p>
