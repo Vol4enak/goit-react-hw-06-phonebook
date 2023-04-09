@@ -16,6 +16,15 @@ export const ContactSlice = createSlice({
       );
     },
     formSubmitHandler(state, actions) {
+      const res = state.contacts.find(
+        index => index.name.toLowerCase() === actions.payload.name.toLowerCase()
+      );
+
+      if (res) {
+        alert(`${actions.payload.name} is already in contacts`);
+        return;
+      }
+
       state.contacts.push({
         id: nanoid(),
         name: actions.payload.name,
